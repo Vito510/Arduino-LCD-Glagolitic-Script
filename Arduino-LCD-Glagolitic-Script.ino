@@ -4,7 +4,7 @@
 LiquidCrystal_I2C lcd(0x27,20,4);
 
 int count = 0;
-int broj_znakova = 0;
+int char_count = 0;
 
 byte mem[][8] = {
         {B00000,B01110,B00100,B00100,B11111,B10101,B10101,B10101},
@@ -41,18 +41,13 @@ void gprint(char x) {
   int x_int = toupper(x);
   int index = -1;
 
-  //Serial.println(x_int);
-
   //hardcoded length
-  Serial.print("----");
   for (int i = 0; i < 22; i++) {
     if (x_int == map_[i][0]) {
         index = i;
-        Serial.println(map_[index][0]);
       }
     }
 
-    Serial.println("---");
 
   int s = 3;
   if (map_[index][1] == 1) {
@@ -66,11 +61,11 @@ void gprint(char x) {
       count++;
   }
 
-  broj_znakova += s-2;
+  char_count += s-2;
 
   lcd.home();
 
-  for (int i = 0; i < broj_znakova; i++) {
+  for (int i = 0; i < char_count; i++) {
       lcd.write(i);
   }  
 
