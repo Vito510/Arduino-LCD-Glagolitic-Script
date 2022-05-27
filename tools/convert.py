@@ -24,14 +24,14 @@ x += "};"
 print(x+"\n")
 
 
-x = "int map_[][2] = {"
+x = "int map_[][4] = {"
 c = 0
 for key in data:
     if len(data[key]) > 8:
-        x += '{' + f'{ord(key)},{c},{c+1}'
+        x += '{' + f'{ord(key)},1,{c},{c+1}'
         c += 1
     else:
-        x += '{' + f'{ord(key)},{c},'
+        x += '{' + f'{ord(key)},0,{c},'
         x = x[:-1]
     x += '},'
     c += 1

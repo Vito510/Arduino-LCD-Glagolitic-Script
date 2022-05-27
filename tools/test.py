@@ -35,6 +35,7 @@ def show(m,i,b):
 
     if b: print(l)
 
+
     for j in range(8):
         z = ""
         for item in l:

@@ -1,7 +1,10 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
-LiquidCrystal_I2C lcd(0x27, 16, 2);
+LiquidCrystal_I2C lcd(0x27,20,4);
+
+int count = 0;
+int broj_znakova = 0;
 
 byte mem[][8] = {
         {B00000,B01110,B00100,B00100,B11111,B10101,B10101,B10101},
@@ -33,41 +36,66 @@ byte mem[][8] = {
         {B00000,B11100,B10100,B10100,B11100,B10100,B11011,B10011},
 };
 
-int map_[][3] = {{65,0},{66,1},{67,2},{68,3,4},{69,5},{70,6},{71,7},{72,8},{73,9},{74,10,11},{75,12},{76,13,14},{77,15},{78,16},{79,17},{80,18},{82,19},{83,20},{84,21,22},{85,23},{86,24,25},{90,26}};
-
+int map_[][4] = {{65,0,0},{66,0,1},{67,0,2},{68,1,3,4},{69,0,5},{70,0,6},{71,0,7},{72,0,8},{73,0,9},{74,1,10,11},{75,0,12},{76,1,13,14},{77,0,15},{78,0,16},{79,0,17},{80,0,18},{82,0,19},{83,0,20},{84,1,21,22},{85,0,23},{86,1,24,25},{90,0,26}};
 void gprint(char x) {
   int x_int = toupper(x);
   int index = -1;
 
+  //Serial.println(x_int);
+
   //hardcoded length
+  Serial.print("----");
   for (int i = 0; i < 22; i++) {
     if (x_int == map_[i][0]) {
         index = i;
+        Serial.println(map_[index][0]);
       }
     }
 
-  if (index == -1) {
-    lcd.print(x);
-    return 0;  
+    Serial.println("---");
+
+  int s = 3;
+  if (map_[index][1] == 1) {
+    s = 4;
   }
-  
-  size_t s = sizeof(map_[index]) / sizeof(map_[index][0]);
-  for (int i = 1; i < s; i++) {
+  Serial.println(s);
+  for (int i = 2; i < s; i++) {
       int j = map_[index][i];
-      lcd.createChar(0, mem[j]);
-      lcd.write(0);
+      //Serial.println(j);
+      lcd.createChar(count, mem[j]);
+      count++;
   }
+
+  broj_znakova += s-2;
+
+  lcd.home();
+
+  for (int i = 0; i < broj_znakova; i++) {
+      lcd.write(i);
+  }  
+
 
   
 }
 
 
 void setup() {
-  char x[] = "Hello World";
+
+  Serial.begin(9600);
+
+  lcd.init();
+
+  lcd.backlight();
+
+  char x[] = "jakov";
+
 
   for (int i = 0; i < strlen(x); i++) {
     gprint(x[i]);  
   }
+
+
+
   
 }
 
