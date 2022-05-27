@@ -87,7 +87,7 @@ void setup() {
 
   lcd.backlight();
 
-  char x[] = "jakov";
+  char x[] = "VITO";
 
 
   for (int i = 0; i < strlen(x); i++) {
