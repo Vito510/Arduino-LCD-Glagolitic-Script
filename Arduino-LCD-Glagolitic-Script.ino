@@ -43,35 +43,49 @@ void gprint(char x[]) {
   int count = 0;
   int char_count = 0;
 
+  int chars[8];
+
   int s = 0;
 
-  for (int k = 0; k < strlen(x); k++) {
-
-    x_int = toupper(x[k]);
+  for (int i = 0; i < strlen(x); i++) {
+    x_int = toupper(x[i]);
     index = -1;
 
-    //find char in map_ (hardcoded length)
+    //find index of char in map_ (hardcoded length)
     for (int i = 0; i < 22; i++) {
       if (x_int == map_[i][0]) {
           index = i;
       }
     }
 
-    s = 3;
-    if (map_[index][1] == 1) {
-      s = 4;
-    }
+    //does the glagolitic char require two chars?
+    s = (map_[index][1] == 1) ? 2 : 1;
 
-    //store char in lcd memory (max 8 chars)
-    for (int i = 2; i < s; i++) {
-        int j = map_[index][i];
-        lcd.createChar(count, mem[j]);
-        count++;
-    }
+    for (int i = 0; i < s; i++) {
+      //check if char is already in chars
+      bool found = false;
+      for (int j = 0; j < 8; j++) {
+        if (map_[index][i+2] == chars[j]) {
+          found = true;
+        }
+      }
 
-    char_count += s-2;
+      //if not, add it
+      if (!found) {
+        chars[char_count++] = map_[index][i+2];
+      }
+
+    }
 
   }
+
+
+  //store chars in lcd memory (max 8 chars)
+  for (int i = 0; i < char_count; i++) {
+      int j = chars[i];
+      lcd.createChar(i, mem[j]);
+  }
+
 
   lcd.home();
 
