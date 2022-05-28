@@ -43,7 +43,7 @@ void gprint(char x[]) {
   int count = 0;
   int char_count = 0;
 
-  int chars[8];
+  int cgram[8];
 
   int s = 0;
 
@@ -65,14 +65,14 @@ void gprint(char x[]) {
       //check if char is already in chars
       bool found = false;
       for (int j = 0; j < 8; j++) {
-        if (map_[index][i+2] == chars[j]) {
+        if (map_[index][i+2] == cgram[j]) {
           found = true;
         }
       }
 
       //if not, add it
       if (!found) {
-        chars[char_count++] = map_[index][i+2];
+        cgram[char_count++] = map_[index][i+2];
       }
 
     }
@@ -82,7 +82,7 @@ void gprint(char x[]) {
 
   //store chars in lcd memory (max 8 chars)
   for (int i = 0; i < char_count; i++) {
-      int j = chars[i];
+      int j = cgram[i];
       lcd.createChar(i, mem[j]);
   }
 
@@ -90,8 +90,29 @@ void gprint(char x[]) {
   lcd.home();
 
   //print chars
-  for (int i = 0; i < char_count; i++) {
-      lcd.write(i);
+  for (int i = 0; i < strlen(x); i++) {
+    //find char index in CGRAM
+    int index = -1;
+    bool double_char = false;
+
+    //find char index in cgram
+    for (int j = 0; j < 8; j++) {
+      if (cgram[i] == x[i]) {
+        index = j;
+
+        //check if char requires two chars
+        if (cgram[i+1] == x[i]) {
+          double_char = true;
+          }
+
+      }
+    }
+
+      lcd.write(cgram[index]);
+      if (double_char) {
+        lcd.write(cgram[index+1]);
+      }
+      
   }  
   
 }
