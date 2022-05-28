@@ -13,4 +13,4 @@ A little school project of mine.
 # Custom character limit
 Sadly the HD44780 and other similar Arduino lcds have a 8 (5x8) custom character limit this is due to the limited size of the CGRAM on the LCD and since some of the glagolithic chars dont fit in a 5x8 grid they require double the space.
 
-To check if a string will fit within the CGRAM use check.py in the tools folder
+**To check if a string will fit within the CGRAM use check.py in the tools folder**
