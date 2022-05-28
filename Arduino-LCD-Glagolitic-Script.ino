@@ -40,7 +40,6 @@ void gprint(char x[]) {
   int x_int;
   int index;
 
-  int count = 0;
   int char_count = 0;
 
   int cgram[8];
@@ -97,22 +96,23 @@ void gprint(char x[]) {
 
     //find char index in cgram
     for (int j = 0; j < 8; j++) {
-      if (cgram[i] == x[i]) {
+      if (cgram[i] == toupper(x[i])) {
         index = j;
 
         //check if char requires two chars
-        if (cgram[i+1] == x[i]) {
+        if (cgram[i+1] == toupper(x[i])) {
           double_char = true;
           }
 
       }
     }
-
+      //print chars
       lcd.write(cgram[index]);
       if (double_char) {
+        //print second char
         lcd.write(cgram[index+1]);
       }
-      
+
   }  
   
 }
@@ -123,6 +123,7 @@ void setup() {
   lcd.init();
   lcd.backlight();
 
+  //print "Vito" in glagolitic script
   gprint("Vito");  
 
 
