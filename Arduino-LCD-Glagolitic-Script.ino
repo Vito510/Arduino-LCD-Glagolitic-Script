@@ -1,7 +1,9 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
 
-LiquidCrystal_I2C lcd(0x27,20,4);
+LiquidCrystal_I2C lcd(0x27,20,4); //I2C
+
 
 byte mem[][8] = {
         {B00000,B01110,B00100,B00100,B11111,B10101,B10101,B10101},
