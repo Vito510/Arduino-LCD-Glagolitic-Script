@@ -164,7 +164,7 @@ void setup()
   lcd.backlight();
 
   //print input in glagolitic script (ONLY UPPERCASE GETS CONVERTED)
-  gprint("PATRIK");
+  gprint("VITO");
 }
 
 void loop() {}
