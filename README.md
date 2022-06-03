@@ -5,7 +5,8 @@ A little school project of mine.
 
 <hr>
 
-<img src="https://user-images.githubusercontent.com/73427833/170783680-3698e122-7dc6-4cf9-aa65-026aa0ae779d.jpg" width="500">
+<img src="https://user-images.githubusercontent.com/73427833/171829980-9ee50c14-8bf1-471d-aa6c-3fcf91f6cc77.jpg" width="500">
+
 <i>Vito</i> in glagolitic script
 
 
